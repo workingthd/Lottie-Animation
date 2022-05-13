@@ -1,0 +1,33 @@
+import {
+  View, Text
+} from 'react-native';
+import styles from './style';
+import LottieView from 'lottie-react-native';
+import { useState, useEffect } from 'react';
+function Pincode({ navigation }) {
+  const [LottieAnim, setLottieAnim] = useState()
+  useEffect(() => {
+    fetch('https://assets3.lottiefiles.com/packages/lf20_n8c73ynu.json', {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+        setLottieAnim(responseData)
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
+  return (
+    <View >
+      {LottieAnim ? <LottieView source={LottieAnim} style={{ width: "100%" }} autoPlay loop /> : (null)}
+    </View>
+
+    //<LottieView source={require('../../../assets/104112-frubana.json')} autoPlay loop />
+
+   
+  );
+}
+
+export default Pincode;
